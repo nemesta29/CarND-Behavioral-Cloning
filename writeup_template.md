@@ -93,6 +93,22 @@ At the end of the process, the vehicle is able to drive autonomously around the 
 #### 2. Final Model Architecture
 
 The final model architecture (model.py lines 18-24) consisted of a convolution neural network with the following layers and layer sizes:
+| Layer         		|     Description	        					| 
+|:---------------------:|:---------------------------------------------:| 
+| Input         		| 32x32x1 Grayscale image						| 
+| Convolution 5x5     	| 1x1 stride, same padding, outputs 28x28x6 	|
+| RELU					|												|
+| Max pooling	      	| 2x2 stride,  outputs 14x14x6  				|
+| Convolution 5x5	    | 1x1 stride, same padding, outputs 10x10x16	|
+| RELU					|												|
+| Max pooling	      	| 2x2 stride,  outputs 5x5x16   				|
+| Flattening			| Output -> 400									|
+| Fully Connected 1		| 400 input, outputs 120    					|
+| Fully Connected 2		| 120 input, outputs 84					    	|
+| Dropout Layer			| keep_prob  *0.5* for training and *1* for test|
+| Final Output			| 84 inputs, 43 outputs        					|
+
+
 Layer (type)              |       Output Shape     |  Params
 ====================================================================================================
 lambda_1 (Lambda)        |        (None, 160, 320, 3)   0           lambda_input_1[0][0]
