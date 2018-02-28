@@ -92,60 +92,27 @@ At the end of the process, the vehicle is able to drive autonomously around the 
 
 #### 2. Final Model Architecture
 
-The final model architecture (model.py lines 18-24) consisted of a convolution neural network with the following layers and layer sizes:
-| Layer         		|     Description	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| Input         		| 32x32x1 Grayscale image						| 
-| Convolution 5x5     	| 1x1 stride, same padding, outputs 28x28x6 	|
-| RELU					|												|
-| Max pooling	      	| 2x2 stride,  outputs 14x14x6  				|
-| Convolution 5x5	    | 1x1 stride, same padding, outputs 10x10x16	|
-| RELU					|												|
-| Max pooling	      	| 2x2 stride,  outputs 5x5x16   				|
-| Flattening			| Output -> 400									|
-| Fully Connected 1		| 400 input, outputs 120    					|
-| Fully Connected 2		| 120 input, outputs 84					    	|
-| Dropout Layer			| keep_prob  *0.5* for training and *1* for test|
-| Final Output			| 84 inputs, 43 outputs        					|
+The final model architecture (model.py lines 52-69) consisted of a convolution neural network with the following layers and layer sizes:
+
+| Layer         		|     Description	        					          		          | 
+| Lambda            | Applies normalization through (x/255 - 0.5) 		          |
+| Cropping          | Crops image to include road only ((70,20), (0,0))		      |
+| Convolution    		| 2D Convolution of depth 6 with 3x3 filter    		          | 
+| Max-Pooling    		| Max-Pooling done with a 2x2 filter size     		          |
+| Convolution    		| 2D Convolution of depth 16 with 3x3 filter    		        | 
+| Max-Pooling    		| Max-Pooling done with a 2x2 filter size     		          |
+| Activation        | Activation layer using reLU                               |
+| Convolution    		| 2D Convolution of depth 64with 3x3 filter    		          | 
+| Dropout           | A dropout layer to reduce overfitting                     |
+| Flatten           | Layer to flatten convolution output                       |
+| Dense             | A fully connected layer with output of 64                 |
+| Dense             | A fully connected layer with output of 128                |
+| Activation        | Activation layer using reLU                               |
+| Dense             | A fully connected layer with output of 64                 |
+| Activation        | Activation layer using reLU                               |
+| Dense             | A fully connected layer with output of 1 (Output Layer)   |
 
 
-Layer (type)              |       Output Shape     |  Params
-====================================================================================================
-lambda_1 (Lambda)        |        (None, 160, 320, 3)   0           lambda_input_1[0][0]
-____________________________________________________________________________________________________
-cropping2d_1 (Cropping2D) |       (None, 70, 320, 3)    0           lambda_1[0][0]
-____________________________________________________________________________________________________
-convolution2d_1 (Convolution2D) | (None, 68, 318, 6)    168         cropping2d_1[0][0]
-____________________________________________________________________________________________________
-maxpooling2d_1 (MaxPooling2D) |   (None, 34, 159, 6)    0           convolution2d_1[0][0]
-____________________________________________________________________________________________________
-convolution2d_2 (Convolution2D)|  (None, 32, 157, 16)   880         maxpooling2d_1[0][0]
-____________________________________________________________________________________________________
-maxpooling2d_2 (MaxPooling2D)   | (None, 16, 78, 16)    0           convolution2d_2[0][0]
-____________________________________________________________________________________________________
-activation_1 (Activation)       | (None, 16, 78, 16)    0           maxpooling2d_2[0][0]
-____________________________________________________________________________________________________
-convolution2d_3 (Convolution2D)  |(None, 14, 76, 64)    9280        activation_1[0][0]
-____________________________________________________________________________________________________
-dropout_1 (Dropout)             | (None, 14, 76, 64)    0           convolution2d_3[0][0]
-____________________________________________________________________________________________________
-flatten_1 (Flatten)             | (None, 68096)         0           dropout_1[0][0]
-____________________________________________________________________________________________________
-dense_1 (Dense)                 | (None, 64)            4358208     flatten_1[0][0]
-____________________________________________________________________________________________________
-dense_2 (Dense)                  |(None, 128)           8320        dense_1[0][0]
-____________________________________________________________________________________________________
-dropout_2 (Dropout)             | (None, 128)           0           dense_2[0][0]
-____________________________________________________________________________________________________
-|activation_2 (Activation)        |(None, 128)      |     0        |   
-____________________________________________________________________________________________________
-|dense_3 (Dense)                  |(None, 64)       |     8256    |   
-____________________________________________________________________________________________________
-|activation_3 (Activation)        |(None, 64)     |       0      |     
-____________________________________________________________________________________________________
-|dense_4 (Dense)                  |(None, 1)      |       65    |     
-====================================================================================================
-Total params: 4,385,177
 
 #### 3. Creation of the Training Set & Training Process
 
