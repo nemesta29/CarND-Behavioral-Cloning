@@ -114,10 +114,9 @@ The final model architecture (model.py lines 52-69) consisted of a convolution n
 | Dense             | A fully connected layer with output of 1 (Output Layer)   |
 
 
-
 #### 3. Creation of the Training Set & Training Process
 
-To capture good driving behavior, I first recorded two laps on track one using center lane driving. Here is an example image of center lane driving:
+Due to hardware limitations, I used Udacity sample data set as the base to train my model on. The dataset had images from center, left and right cameras, as shown below:
 
 ![alt text][image2]
 
