@@ -7,7 +7,7 @@ The repo contains the following files:
   * model.h5 - Saved model of the architecture used for learning
   * drive.py - The python code used to drive using the model saved
   * track1.mp4 - Video of a successful lap, autonomously driven around Track 1
-  * Behavioral_Writeup - A writeup describing the thought process involved in the project
+  * Behavioral_Cloning_Writeup - A writeup describing the thought process involved in the project
   
   
 Please install opencv-python using pip before running model.py to ensure error free running
