@@ -82,11 +82,9 @@ The overall strategy for deriving a model architecture was to accuractely predic
 
 My first step was to use a convolution neural network model similar to the LeNet model. I thought this model might be appropriate because it was built to handle image data for learning. However, since the prediction was different in our requirement, the model had to be modified to suit the regression needs of present situation.
 
-In order to gauge how well the model was working, I split my image and steering angle data into a training and validation set. I found that my first model had a low mean squared error on the training set but a high mean squared error on the validation set. This implied that the model was overfitting. 
+In order to gauge how well the model was working, I split my image and steering angle data into a training and validation set. I found that my first model had a low mean squared error on the training set a higher mean squared error on the validation set. This implied that the model was overfitting. 
 
-To combat the overfitting, I modified the model so that ...
-
-Then I ... 
+To combat the overfitting, I modified the model to include dropouts to reduce the number of parameters. Further, I used left and right camera images to increase the data and allow the model to learn better. Max pooling was initially used after every convolution vto reduce the number of inputs, but it was seen that data was lost due to excessive usage of pooling and hence it was kept only after two convolution layers.
 
 The final step was to run the simulator to see how well the car was driving around track one. There were a few spots where the vehicle fell off the track... to improve the driving behavior in these cases, I ....
 
