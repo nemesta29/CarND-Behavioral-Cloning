@@ -93,43 +93,41 @@ At the end of the process, the vehicle is able to drive autonomously around the 
 #### 2. Final Model Architecture
 
 The final model architecture (model.py lines 18-24) consisted of a convolution neural network with the following layers and layer sizes:
-
-____________________________________________________________________________________________________
-Layer (type)                     Output Shape          Param     Connected to
+Layer (type)              |       Output Shape     |  Params
 ====================================================================================================
-lambda_1 (Lambda)                (None, 160, 320, 3)   0           lambda_input_1[0][0]
+lambda_1 (Lambda)        |        (None, 160, 320, 3)   0           lambda_input_1[0][0]
 ____________________________________________________________________________________________________
-cropping2d_1 (Cropping2D)        (None, 70, 320, 3)    0           lambda_1[0][0]
+cropping2d_1 (Cropping2D) |       (None, 70, 320, 3)    0           lambda_1[0][0]
 ____________________________________________________________________________________________________
-convolution2d_1 (Convolution2D)  (None, 68, 318, 6)    168         cropping2d_1[0][0]
+convolution2d_1 (Convolution2D) | (None, 68, 318, 6)    168         cropping2d_1[0][0]
 ____________________________________________________________________________________________________
-maxpooling2d_1 (MaxPooling2D)    (None, 34, 159, 6)    0           convolution2d_1[0][0]
+maxpooling2d_1 (MaxPooling2D) |   (None, 34, 159, 6)    0           convolution2d_1[0][0]
 ____________________________________________________________________________________________________
-convolution2d_2 (Convolution2D)  (None, 32, 157, 16)   880         maxpooling2d_1[0][0]
+convolution2d_2 (Convolution2D)|  (None, 32, 157, 16)   880         maxpooling2d_1[0][0]
 ____________________________________________________________________________________________________
-maxpooling2d_2 (MaxPooling2D)    (None, 16, 78, 16)    0           convolution2d_2[0][0]
+maxpooling2d_2 (MaxPooling2D)   | (None, 16, 78, 16)    0           convolution2d_2[0][0]
 ____________________________________________________________________________________________________
-activation_1 (Activation)        (None, 16, 78, 16)    0           maxpooling2d_2[0][0]
+activation_1 (Activation)       | (None, 16, 78, 16)    0           maxpooling2d_2[0][0]
 ____________________________________________________________________________________________________
-convolution2d_3 (Convolution2D)  (None, 14, 76, 64)    9280        activation_1[0][0]
+convolution2d_3 (Convolution2D)  |(None, 14, 76, 64)    9280        activation_1[0][0]
 ____________________________________________________________________________________________________
-dropout_1 (Dropout)              (None, 14, 76, 64)    0           convolution2d_3[0][0]
+dropout_1 (Dropout)             | (None, 14, 76, 64)    0           convolution2d_3[0][0]
 ____________________________________________________________________________________________________
-flatten_1 (Flatten)              (None, 68096)         0           dropout_1[0][0]
+flatten_1 (Flatten)             | (None, 68096)         0           dropout_1[0][0]
 ____________________________________________________________________________________________________
-dense_1 (Dense)                  (None, 64)            4358208     flatten_1[0][0]
+dense_1 (Dense)                 | (None, 64)            4358208     flatten_1[0][0]
 ____________________________________________________________________________________________________
-dense_2 (Dense)                  (None, 128)           8320        dense_1[0][0]
+dense_2 (Dense)                  |(None, 128)           8320        dense_1[0][0]
 ____________________________________________________________________________________________________
-dropout_2 (Dropout)              (None, 128)           0           dense_2[0][0]
+dropout_2 (Dropout)             | (None, 128)           0           dense_2[0][0]
 ____________________________________________________________________________________________________
-activation_2 (Activation)        (None, 128)           0           dropout_2[0][0]
+|activation_2 (Activation)        |(None, 128)      |     0        |   
 ____________________________________________________________________________________________________
-dense_3 (Dense)                  (None, 64)            8256        activation_2[0][0]
+|dense_3 (Dense)                  |(None, 64)       |     8256    |   
 ____________________________________________________________________________________________________
-activation_3 (Activation)        (None, 64)            0           dense_3[0][0]
+|activation_3 (Activation)        |(None, 64)     |       0      |     
 ____________________________________________________________________________________________________
-dense_4 (Dense)                  (None, 1)             65          activation_3[0][0]
+|dense_4 (Dense)                  |(None, 1)      |       65    |     
 ====================================================================================================
 Total params: 4,385,177
 
