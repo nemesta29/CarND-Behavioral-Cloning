@@ -94,7 +94,8 @@ At the end of the process, the vehicle is able to drive autonomously around the 
 
 The final model architecture (model.py lines 52-69) consisted of a convolution neural network with the following layers and layer sizes:
 
-| Layer         		|     Description	        					          		          | 
+| Layer         		|     Description	        					          		          |
+| ----------------- |:---------------------------------------------------------:|
 | Lambda            | Applies normalization through (x/255 - 0.5) 		          |
 | Cropping          | Crops image to include road only ((70,20), (0,0))		      |
 | Convolution    		| 2D Convolution of depth 6 with 3x3 filter    		          | 
